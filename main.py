@@ -3,7 +3,6 @@ from prime_analysis_toolkit.generators.prime_generator import generate_primes
 from prime_analysis_toolkit.generators.twin_prime_generator import generate_twin_primes
 from prime_analysis_toolkit.analysis.prime_distribution import plot_prime_density
 
-
 def main():
     # Initialize the Argument Parser
     parser = argparse.ArgumentParser(description="Prime Analysis Toolkit")
