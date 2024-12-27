@@ -13,3 +13,5 @@ __pycache__/
 __pycache__/
 .DS_Store
 .pytest_cache/
+prime_analysis_toolkit.egg-info/
+prime_analysis_toolkit.egg-info/
