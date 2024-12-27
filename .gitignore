@@ -6,3 +6,7 @@ __pycache__/
 *.pem
 *.key
 
+.DS_Store
+.DS_Store
+__pycache__/
+.DS_Store
