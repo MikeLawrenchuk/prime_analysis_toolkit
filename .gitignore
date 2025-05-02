@@ -1,17 +1,19 @@
+# Virtual environments
 venv/
+
+# Python byte-code caches
 __pycache__/
 *.pyc
+
+# macOS
 .DS_Store
+
+# Environment files and keys
 .env
 *.pem
 *.key
 
-.DS_Store
-.DS_Store
-__pycache__/
-.DS_Store
-__pycache__/
-.DS_Store
+# Testing and build artifacts
 .pytest_cache/
 prime_analysis_toolkit.egg-info/
-prime_analysis_toolkit.egg-info/
+
