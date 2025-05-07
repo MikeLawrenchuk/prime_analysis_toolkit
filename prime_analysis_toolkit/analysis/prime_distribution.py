@@ -1,40 +1,37 @@
-
-import matplotlib.pyplot as plt
+#!/usr/bin/env python3
 from prime_analysis_toolkit.generators.prime_generator import generate_primes
 
-
-def plot_prime_density(limit):
+def analyze_distribution(data):
     """
-    Plot the density of primes π(n)/n for all n ≤ limit.
+    Compute the density π(p)/p for a sequence of primes.
 
-    Args:
-        limit (int): The upper limit for calculating prime density. Must be ≥ 2.
+    If `data` is an integer, it is treated as the upper limit
+    and all primes ≤ data are generated. If `data` is
+    a list or tuple of integers, it is taken to be exactly the
+    sequence of primes.
 
-    Raises:
-        ValueError: If 'limit' is not an integer ≥ 2.
+    Returns:
+        (primes, densities):  
+          * primes    – list of ints  
+          * densities – list of floats, where densities[i] = (i+1)/primes[i]
     """
-    # Input guard
-    if not isinstance(limit, int) or limit < 2:
-        raise ValueError("Limit must be an integer ≥ 2 to plot prime density.")
+    # Handle integer input by generating primes up to 'limit'
+    if isinstance(data, int):
+        limit = data
+        if limit < 2:
+            return [], []
+        primes = generate_primes(limit)
+    # Handle explicit prime list/tuple input
+    elif isinstance(data, (list, tuple)):
+        primes = list(data)
+        if any((not isinstance(p, int)) or p < 2 for p in primes):
+            raise ValueError("All elements must be integers ≥ 2.")
+    else:
+        raise TypeError("Input must be an int or a list/tuple of ints.")
 
-    # Efficient single-pass sieve with running prime count
-    sieve = [True] * (limit + 1)
-    count = 0
-    xs, ys = [], []
-    for i in range(2, limit + 1):
-        if sieve[i]:
-            count += 1
-            for j in range(i * i, limit + 1, i):
-                sieve[j] = False
-        xs.append(i)
-        ys.append(count / i)
+    # Compute densities π(p)/p for each prime p
+    densities = [(i+1) / p for i, p in enumerate(primes)]
+    return primes, densities
 
-    # Plotting
-    plt.figure(figsize=(8, 5))
-    plt.plot(xs, ys)
-    plt.xlabel("n")
-    plt.ylabel("Prime Density π(n)/n")
-    plt.title(f"Prime Density vs n (up to {limit})")
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
+# alias for backwards compatibility
+plot_prime_density = analyze_distribution

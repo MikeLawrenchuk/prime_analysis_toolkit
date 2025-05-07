@@ -1,4 +1,3 @@
-
 from prime_analysis_toolkit.generators.prime_generator import generate_primes
 
 def generate_twin_primes(limit):
@@ -6,17 +5,18 @@ def generate_twin_primes(limit):
     Returns a list of twin-prime pairs (p, p+2) where p+2 ≤ limit.
 
     Args:
-        limit (int): The upper limit for finding twin primes. Must be ≥ 3.
+        limit (int): The upper limit for finding twin primes.
 
     Returns:
-        list of tuple: List of twin-prime pairs.
+        list of tuple: List of twin-prime pairs. If limit < 3, returns an empty list.
 
     Raises:
-        ValueError: If 'limit' is not an integer ≥ 3.
+        TypeError: If 'limit' is not an integer.
     """
-    # Input validation guard
-    if not isinstance(limit, int) or limit < 3:
-        raise ValueError("Limit must be an integer ≥ 3 to find twin primes.")
+    if not isinstance(limit, int):
+        raise TypeError(f"limit must be int, got {type(limit).__name__}")
+    if limit < 3:
+        return []
 
     primes = generate_primes(limit)
     twin_primes = [(p, p+2) for p in primes if p+2 in primes]

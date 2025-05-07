@@ -21,9 +21,14 @@ def generate_primes(limit: int) -> List[int]:
         ValueError: If `limit` is outside the range [2, MAX_PRIME_LIMIT].
     """
     if not isinstance(limit, int):
-        raise TypeError(f"limit must be int, got {type(limit).__name__}")
-    if limit < 2 or limit > MAX_PRIME_LIMIT:
-        raise ValueError(f"limit must be between 2 and {MAX_PRIME_LIMIT}, got {limit}")
+       raise TypeError(f"limit must be int, got {type(limit).__name__}")
+    if limit < 2:
+       return []
+    if limit > MAX_PRIME_LIMIT:
+       raise ValueError(f"limit must be between 2 and {MAX_PRIME_LIMIT}, got {limit}")
+
+
+
 
     logger.info("Generating primes up to %d", limit)
 
